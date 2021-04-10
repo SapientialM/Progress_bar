@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+    <RelativeLayout
+        android:id="@+id/titileBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray">
+    <Button
+        android:id="@+id/back_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_button"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@drawable/gray"
+        android:textColor="@android:color/holo_blue_bright"/>
+        <TextView
+            android:layout_toEndOf="@+id/back_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_line"
+            android:textSize="30sp"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+    <WebView
+        android:id="@+id/help_manualWeb"
+        android:layout_below="@+id/titileBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

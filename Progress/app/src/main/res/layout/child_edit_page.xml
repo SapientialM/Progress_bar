@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PageEditActivity"
+    android:background="@android:color/black">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/Text1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/gray"
+            android:layout_margin="20dp"
+            >
+            <LinearLayout
+                android:id="@+id/group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:text="Group name"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Group name"
+                android:layout_marginLeft="100dp"
+                android:gravity="center"
+                android:textColor="@color/gray_text"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/task_name"
+                android:layout_below="@id/group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Task name"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"/>
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Task name"
+                    android:layout_marginLeft="100dp"
+                    android:gravity="center"
+                    android:textColor="@color/gray_text"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/buttonData"
+                android:background="@drawable/button_left"
+                android:layout_below="@id/task_name"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Data"/>
+            <Button
+                android:id="@+id/buttonList"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/buttonData"
+                android:layout_below="@+id/task_name"
+                android:background="@drawable/button_right"
+                android:text="List"
+                android:layout_marginLeft="20dp" />
+        </RelativeLayout>
+        <FrameLayout
+            android:layout_below="@+id/Text1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_change"/>
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

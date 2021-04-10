@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gray">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_num"
+            android:textSize="20dp"
+            android:text="Task Name"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_task_num"
+            android:layout_toRightOf="@+id/task_num"
+            android:gravity="center"
+            android:text="data"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_time"
+            android:layout_below="@+id/task_num"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="Task Time"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            />
+        <Button
+            android:id="@+id/btnTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_task_num"
+            android:layout_toRightOf="@+id/task_time"
+            android:gravity="center"
+            android:text="Select Time"
+            android:textColor="@color/gray"/>
+        <TextView
+            android:id="@+id/test"
+            android:textSize="20dp"
+            android:text="Test"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/task_time"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
