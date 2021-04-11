@@ -70,7 +70,6 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/username_edit"
-                android:singleLine="true"
                 android:layout_toRightOf="@+id/username_text"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
@@ -96,7 +95,6 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/userpswd_edit"
-                android:singleLine="true"
                 android:layout_toRightOf="@+id/userpswd_text"
                 android:layout_marginLeft="22dp"
                 android:layout_width="match_parent"

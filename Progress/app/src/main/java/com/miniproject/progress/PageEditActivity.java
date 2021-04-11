@@ -4,21 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.miniproject.progress.sqliteDB.DatabaseHelper;
 import com.miniproject.progress.ui.main.EditPageFragment;
 
 import java.util.List;
 
+import static com.miniproject.progress.MainActivity.hideStatusBar;
+
 public class PageEditActivity extends AppCompatActivity {
 
     private EditPageFragment DataFragment;
-    private EditPageFragment ListFragment;
-
+    private DatabaseHelper data;
     private Button btnChange_data;
-    private Button btnChange_list;
     private Button curChange;
 
     private EditPageFragment currentFragment;
@@ -26,55 +30,36 @@ public class PageEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        data=new DatabaseHelper(this);
         setContentView(R.layout.child_edit_page);
-
+        hideStatusBar(PageEditActivity.this);
+        Intent intent=getIntent();
+        String id=intent.getStringExtra("ID");
+        int ID=Integer.parseInt(id);
         btnChange_data = findViewById(R.id.buttonData);
-        btnChange_list = findViewById(R.id.buttonList);
 
         // 实例化
-        ListFragment = new EditPageFragment("List");
         DataFragment = new EditPageFragment("Data");
 
         btnChange_data.setOnClickListener(v -> {
-            curChange.setBackground(getResources().getDrawable(R.drawable.buttonright_normal));
-            curChange = btnChange_data;
-            curChange.setBackground(getResources().getDrawable(R.drawable.buttonleft_press));
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            if(!DataFragment.isAdded()){
-                fragmentTransaction.hide(currentFragment)
-                        .add(R.id.fragment_change,DataFragment)
-                        .commit();
-            }else {
-                fragmentTransaction.hide(currentFragment)
-                        .show(DataFragment)
-                        .commit();
-            }
-            currentFragment = DataFragment;
+            EditText task_name=findViewById(R.id.edit_task_name);
+            Button time=findViewById(R.id.btnTime);
+            EditText task_num=findViewById(R.id.edit_task_num_);
+            EditText complete_num=findViewById(R.id.edit_task_num_comp_);
+            String tName=task_name.getText().toString();
+            String Time=time.getText().toString();
+            String Task_Num=task_num.getText().toString();
+            String Complete_num=complete_num.getText().toString();
+            System.out.print("--------------alter before");
+            data.alterByID(id,tName,Time,Task_Num,Complete_num);
+            System.out.print("-------------alter");
+            finish();
         });
-
-        btnChange_list.setOnClickListener(v -> {
-            curChange.setBackground(getResources().getDrawable(R.drawable.buttonleft_normal));
-            curChange = btnChange_list;
-            curChange.setBackground(getResources().getDrawable(R.drawable.buttonright_press));
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            if(!ListFragment.isAdded()){
-                fragmentTransaction.hide(currentFragment)
-                        .add(R.id.fragment_change,ListFragment)
-                        .commit();
-            }else {
-                fragmentTransaction.hide(currentFragment)
-                        .show(ListFragment)
-                        .commit();
-            }
-            currentFragment = ListFragment;
-        });
-
 
         // 将 Fragment 放入到 Activity 中
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_change, DataFragment, "Data").commit();
         currentFragment = DataFragment;
         curChange = btnChange_data;
-        curChange.setBackground(getResources().getDrawable(R.drawable.buttonleft_press));
     }
 }
 

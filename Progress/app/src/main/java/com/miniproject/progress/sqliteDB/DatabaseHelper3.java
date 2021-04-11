@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DatabaseName="mainItem.db";
-    public static String Table_Name="t_mainItem";
+public class DatabaseHelper3 extends SQLiteOpenHelper {
+    public static final String DatabaseName="compItem.db";
+    public static String Table_Name="t_Done";
 
     public String COL_1="task_progress";
     public String COL_2="time_progress";
@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String COL_8="tot_sub";
 
 
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper3(Context context) {
         super(context, DatabaseName,null,1);
     }
 
@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "tot_task integer,"+
                 "tot_time integer,"+
                 "tot_sub integer)"
-                );
+        );
     }
 
     @Override
@@ -62,43 +62,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public Cursor readID(String id){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor cursor=sqLiteDatabase.rawQuery("SELECT * FROM "+Table_Name+" where id like "+id,null);
-        return cursor;
-    }
-    public String upgradeOne(String id,String value,String name){
-        return "UPDATE " +Table_Name+
-                " SET "+name+" = '"+value+
-                "' WHERE id = "+id;
-    }
-    public void alterByID(String id,String task_name,String time,String task_num,String complete_num){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        int totTask=Integer.parseInt(task_num);
-        int taskProgress=Integer.parseInt(complete_num);
-        String sql1=upgradeOne(id,task_name,COL_3);
-        sqLiteDatabase.execSQL(sql1);
-        sql1=upgradeOne(id,time,"date");
-        sqLiteDatabase.execSQL(sql1);
-        sql1=upgradeOne(id,task_num,"tot_task");
-        sqLiteDatabase.execSQL(sql1);
-        sql1=upgradeOne(id,complete_num,"task_progress");
-        sqLiteDatabase.execSQL(sql1);
 
-    }
     public Cursor readData() {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + Table_Name, null);
-        return cursor;
-    }
-    public void deleteData(){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.execSQL("delete from t_mainItem where id in (select id from t_mainItem order by id desc limit 0,1)");
-    }
-    public Cursor removeData(){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        String sql="select * from t_mainItem order by id desc limit 0,1";
-        Cursor cursor=sqLiteDatabase.rawQuery(sql,null);
         return cursor;
     }
 }

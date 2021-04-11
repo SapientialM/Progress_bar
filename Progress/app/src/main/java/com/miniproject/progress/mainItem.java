@@ -1,6 +1,7 @@
 package com.miniproject.progress;
 
 public class mainItem {
+    private int id;
     private int task_progress;
     private int time_progress;
     private String Task_name;
@@ -9,8 +10,9 @@ public class mainItem {
     private int tot_task;
     private int tot_time;
     private int tot_sub;
-    public mainItem(int task_progress,int time_progress,String Task_name,int subTask_num,String date,int tot_task,int tot_time,int tot_sub)
+    public mainItem(int id,int task_progress,int time_progress,String Task_name,int subTask_num,String date,int tot_task,int tot_time,int tot_sub)
     {
+        this.id=id;
         this.task_progress=task_progress;
         this.time_progress=time_progress;
         this.Task_name=Task_name;
@@ -19,6 +21,18 @@ public class mainItem {
         this.tot_task=tot_task;
         this.tot_time=tot_time;
         this.tot_sub=tot_sub;
+    }
+
+    public mainItem() {
+
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setTot_sub(int tot_sub) {

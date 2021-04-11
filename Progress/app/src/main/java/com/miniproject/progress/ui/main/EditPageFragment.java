@@ -9,12 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.miniproject.progress.R;
 
+import com.miniproject.progress.Adapter2;
+import com.miniproject.progress.R;
+import com.miniproject.progress.listItem;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class EditPageFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
@@ -24,6 +30,7 @@ public class EditPageFragment extends Fragment implements DatePickerDialog.OnDat
         this.title = title;
     }
     public EditPageFragment(){};
+    private ListView list;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,6 +50,17 @@ public class EditPageFragment extends Fragment implements DatePickerDialog.OnDat
             btnTime.setOnClickListener(v -> {
                 initCalendar();
             });
+        }
+        else if(title.equals("List")){
+            List<listItem> frag2_list=new ArrayList<>();
+            list=view.findViewById(R.id.frag2_list);
+            listItem item=new listItem("",false);
+            for(int i=1;i<=3;i++)
+            {
+                frag2_list.add(item);
+            }
+            Adapter2 adapter2=new Adapter2(getActivity(),R.layout.list_item,frag2_list);
+            list.setAdapter(adapter2);
         }
     }
 

@@ -63,17 +63,8 @@
                 android:layout_below="@id/task_name"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:text="Data"/>
-            <Button
-                android:id="@+id/buttonList"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/buttonData"
-                android:layout_below="@+id/task_name"
-                android:background="@drawable/button_right"
-                android:text="List"
-                android:layout_marginLeft="20dp" />
+                android:layout_centerHorizontal="true"
+                android:text="CREATE"/>
         </RelativeLayout>
         <FrameLayout
             android:layout_below="@+id/Text1"

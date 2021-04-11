@@ -1,14 +1,25 @@
 package com.miniproject.progress;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.miniproject.progress.jdbc.UserDao;
+import com.miniproject.progress.sqliteDB.DatabaseHelper;
+import com.miniproject.progress.sqliteDB.DatabaseHelper2;
 import com.miniproject.progress.ui.main.MainPageFragment;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.text.BreakIterator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tab3;
     private TextView curTab;
 
+    private DatabaseHelper2 databaseHelper;
+
     public boolean isLogin = false;
     public String userName = "";
 
@@ -29,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        hideStatusBar(MainActivity.this);
+
         initView();
-
-
         mainPageFragment1 = new MainPageFragment("tab1");
         mainPageFragment2 = new MainPageFragment("tab2");
         mainPageFragment3 = new MainPageFragment("tab3");
@@ -78,14 +91,15 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         changeTabColor(tab);
         if(!tab.isAdded()){
-            fragmentTransaction.hide(currentFragment)
+            fragmentTransaction.remove(currentFragment)
                     .add(R.id.fragment_main,tab)
                     .commit();
         }else {
-            fragmentTransaction.hide(currentFragment)
+            fragmentTransaction.remove(currentFragment)
                     .show(tab)
                     .commit();
         }
+
         currentFragment = tab;
     }
 
@@ -101,5 +115,30 @@ public class MainActivity extends AppCompatActivity {
             curTab = tab3;
             curTab.setBackgroundColor(getResources().getColor(R.color.gray_press));
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        databaseHelper = new DatabaseHelper2(MainActivity.this);
+        TextView text = findViewById(R.id.log_info);
+        if(databaseHelper.isLogin()){
+            String name = databaseHelper.getLoginName();
+            if(!name.isEmpty()&&text!=null)
+                text.setText("Welcom back! "+name);
+            System.out.println("Login name:--"+name+"------");
+            System.out.println("-------loginstate:--"+databaseHelper.isLogin()+" ------");
+            System.out.println("-------loginname:--"+databaseHelper.getLoginName()+" ----");
+        }
+        System.out.println("------------changed----------");
+    }
+
+    public static void hideStatusBar(Activity activity){
+        View decorView = activity.getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        ActionBar actionBar = activity.getActionBar();
+        if (actionBar != null)
+            actionBar.hide();
     }
 }
